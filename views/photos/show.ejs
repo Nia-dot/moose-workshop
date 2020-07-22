@@ -1,0 +1,66 @@
+<%- include("../partials/header") %> 
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-2">
+			<p class="lead">
+				Photos
+			</p>
+			<div class="list-group">
+				<li class="list-group-item">Category 1</li>	
+				<li class="list-group-item">Category 2</li>	
+				<li class="list-group-item">Category 3</li>
+			</div>
+		</div>
+		<div class="col-md-6 mb-2">
+			<div class="img-thumbnail border border-secondary">
+				<figure class="figure mb-0">
+					<h1 class="d-inline figure-caption text-left">
+						<h3>
+							<%= photos.name %>
+						</h3>
+					</h1>
+					<p>
+						<%= photos.description %>
+					</p>
+					<img src="<%= photos.image %>" class="figure-img img-fluid rounded" alt="Would be photo.">
+					<figcaption class="figure-caption text-left mb-0"> by <%= photos.author.username %>.</figcaption>
+					<a class="float-left btn btn-outline-secondary btn-sm " href="/photos/<%=photos._id%>/comments/new">Leave a comment</a>
+					<%if(currentUser && photos.author.id.equals(currentUser._id)){%>
+					<a class="mx-1 float-left btn btn-outline-secondary btn-sm " href="/photos/<%=photos._id%>/edit">Edit</a>
+					<form class="inline" action="/photos/<%=photos._id%>?_method=DELETE" method="POST">
+					<button class="float-left btn btn-outline-secondary btn-sm ">Delete</button>
+					</form>
+					<%}%>
+				</figure>
+			</div>
+		</div>
+		<div class="col-md-4 well">
+			
+			<% photos.comments.forEach(function(comment){%>
+				<div class="card border-secondary mb-1">
+					<div class="card-body text-dark p-1 pl-2">
+						<p class="card-text"><%=comment.text%></p>
+					</div>
+					<div class="card-footer text-muted p-1">
+						- <%=comment.author.username%>
+						<%if(currentUser && comment.author.id.equals(currentUser._id)){%>
+							<form class="inline float-right mb-0" 
+								  action="/photos/<%=photos._id%>/comments/<%=comment._id%>?_method=DELETE" 
+								  method="POST">
+							<button class="btn btn-outline-secondary btn-sm mb-0">Delete</button>
+							</form>
+							<a class="mx-1 float-right btn btn-outline-secondary btn-sm mb-0" 
+							   href="/photos/<%=photos._id%>/comments/<%=comment._id%>/edit">
+								Edit
+							</a>
+						<%}%>
+					</div>
+				</div>	
+			<%});%>
+		</div>
+	</div>
+</div>
+
+
+<%-include("../partials/footer")%>

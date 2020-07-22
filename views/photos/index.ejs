@@ -1,0 +1,31 @@
+<%- include("../partials/header") %> 
+<div class="container">
+	
+	<div class="jumbotron">
+		<h1>Summer's Photos</h1>
+		<p>Look at all of these awesome photos we took</p>
+		<p>
+			<a class="btn btn-light btn-lg" href="/photos/new" role="button">Add new</a>
+		</p>
+	</div>
+	
+	<div class="card-columns">
+		<%photos.forEach(function(photos){%>
+				
+				<div class="card bg-light">
+					<img class="card-img-top" src="<%=photos.image%>" alt="Card image cap">
+					<div class="card-img-overlay text-light shadow">
+						<h5 class="card-title"><%= photos.name %></h5>
+					</div>
+					<div class="card-body">
+						<p class="card-text"><%= photos.description %></p>
+						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+						<a href="/photos/<%=photos._id%>" class="btn btn-outline-secondary btn-sm stretched-link">Show more</a>
+					</div>
+				</div>
+			
+		<%})%>
+	</div>
+
+	<%-include("../partials/footer")%>
+</div>	

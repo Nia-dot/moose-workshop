@@ -1,0 +1,23 @@
+<%- include("../partials/header") %> 
+
+<div class="container" >
+	<div class="jumbotron">
+		<h1>
+			Add a new comment to <%= photos.name %>
+		</h1>
+	</div>	
+	
+	<form action="/photos/<%= photos._id%>/comments/" method="POST">
+		<div class="form-group">
+			<label for="text">Comment</label>
+			<input type="text" class="form-control" id="text" name="comment[text]" placeholder="Text">
+		</div>
+		<button class="btn btn-lg btn-light btn-block">
+			 Upload
+		</button>
+		<a class="btn btn-xs btn-light btn-block" href="/photos" role="button">Go back</a>
+	</form>
+
+</div>
+
+<%-include("../partials/footer")%>
